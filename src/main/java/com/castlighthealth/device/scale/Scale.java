@@ -3,6 +3,7 @@ package com.castlighthealth.device.scale;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.castlighthealth.device.rpi.Hx711;
+import com.castlighthealth.device.rpi.Rpi3b;
 
 @SpringBootApplication
 public class Scale {
@@ -15,11 +16,11 @@ public class Scale {
 		Integer data, control;
 		data = Integer.decode(args[0]);
 		control = Integer.decode(args[1]);
-		if (Hx711.RPI_3B_PINS.get(data) == null) {
+		if (Rpi3b.mapRpi3bLineToPin(data) == null) {
 			System.out.printf("Error: invalid data pin '%d'\n", data);
 			data = null;
 		}
-		if (Hx711.RPI_3B_PINS.get(control) == null) {
+		if (Rpi3b.mapRpi3bLineToPin(control) == null) {
 			System.out.printf("Error: invalid control pin '%d'\n", control);
 			control = null;
 		}
@@ -28,7 +29,7 @@ public class Scale {
 		}
 		// create instance of weighing scale controller
 		System.out.println("Creating instance of the HX711 controller...");
-		Hx711 hx711 = new Hx711(Hx711.RPI_3B_PINS.get(data), Hx711.RPI_3B_PINS.get(control));
+		Hx711 hx711 = new Hx711(Rpi3b.mapRpi3bLineToPin(data), Rpi3b.mapRpi3bLineToPin(control));
 		try {
 			// take 10 measurements and print
 			System.out.println("Starting measurements...");
