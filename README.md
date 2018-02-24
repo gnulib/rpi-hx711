@@ -35,7 +35,7 @@ Downloaded: https://repo.maven.apache.org/maven2/com/google/guava/guava/18.0/gua
 [INFO] Finished at: 2018-02-24T10:59:39-08:00
 [INFO] Final Memory: 21M/52M
 [INFO] ------------------------------------------------------------------------
-
+```
 # Usage
 ```
 java -Dpi4j.linking=dynamic -jar target/rpi-hx711-0.0.1-SNAPSHOT.war <data pin#> <control pin#>
