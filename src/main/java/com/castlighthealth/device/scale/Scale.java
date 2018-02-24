@@ -3,16 +3,32 @@ package com.castlighthealth.device.scale;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.castlighthealth.device.rpi.Hx711;
-import com.pi4j.io.gpio.RaspiPin;
 
 @SpringBootApplication
 public class Scale {
 
 	public static void main(String[] args) {
+		if (args.length != 2) {
+			System.out.println("Error: need data pin and control pin numbers!");
+			return;
+		}
+		Integer data, control;
+		data = Integer.decode(args[0]);
+		control = Integer.decode(args[1]);
+		if (Hx711.RPI_3B_PINS.get(data) == null) {
+			System.out.printf("Error: invalid data pin '%d'\n", data);
+			data = null;
+		}
+		if (Hx711.RPI_3B_PINS.get(control) == null) {
+			System.out.printf("Error: invalid control pin '%d'\n", control);
+			control = null;
+		}
+		if (data == null || control == null) {
+			return;
+		}
 		// create instance of weighing scale controller
-		// its hard coded for now, will need to make it programmable
 		System.out.println("Creating instance of the HX711 controller...");
-		Hx711 hx711 = new Hx711(RaspiPin.GPIO_21, RaspiPin.GPIO_22);
+		Hx711 hx711 = new Hx711(Hx711.RPI_3B_PINS.get(data), Hx711.RPI_3B_PINS.get(control));
 		try {
 			// take 10 measurements and print
 			System.out.println("Starting measurements...");
@@ -23,7 +39,6 @@ public class Scale {
 					Thread.sleep(100);			
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// shutdown the controller
