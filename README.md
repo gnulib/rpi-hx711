@@ -20,6 +20,7 @@ git clone https://github.com/gnulib/rpi-hx711.git
 
 ### Build
 ```
+cd rpi-hx711
 mvn clean package
 [INFO] Scanning for projects...
 Downloading: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/1.3.3.RELEASE/spring-boot-starter-parent-1.3.3.RELEASE.pom
