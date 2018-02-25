@@ -41,10 +41,10 @@ Downloaded: https://repo.maven.apache.org/maven2/com/google/guava/guava/18.0/gua
 Hook up the HX711 controller to your RPi3B GPIO port as following:
 * VCC to Raspberry Pi Pin 2 (5V)
 * GND to Raspberry Pi Pin 6 (GND)
-* DT to Raspberry Pi Pin 29
-* SCK to Raspberry Pi Pin 31
+* DT to Raspberry Pi Pin 29 (data pin)
+* SCK to Raspberry Pi Pin 31 (control pin)
 
 Then execute the application:
 ```
-java -Dpi4j.linking=dynamic -jar target/rpi-hx711-0.0.1-SNAPSHOT.war <data pin#> <control pin#>
+java -Dpi4j.linking=dynamic -jar target/rpi-hx711-0.0.1-SNAPSHOT.war 29 31
 ```
